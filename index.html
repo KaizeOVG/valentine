@@ -31,7 +31,233 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Canvas cho particles */
+        /* ==================== QUIZ SCREEN ==================== */
+        #quiz-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #ffc3a0 75%, #ff9a9e 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.8s ease;
+        }
+
+        #quiz-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.9);
+        }
+
+        .quiz-container {
+            max-width: 600px;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 50px 40px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            animation: fadeInScale 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .quiz-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 182, 193, 0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .quiz-question {
+            font-size: 1.8em;
+            color: #ff1493;
+            margin-bottom: 40px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .quiz-emoji {
+            font-size: 80px;
+            margin-bottom: 30px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px rgba(255, 20, 147, 0.4));
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.15); }
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quiz-option {
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            font-size: 1.1em;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(196, 69, 105, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-option::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .quiz-option:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .quiz-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(196, 69, 105, 0.6);
+        }
+
+        .quiz-option:active {
+            transform: translateY(0);
+        }
+
+        .quiz-response {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+            border-radius: 20px;
+            animation: fadeInUp 0.6s ease-out;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .quiz-response.show {
+            display: block;
+        }
+
+        .quiz-response p {
+            font-size: 1.3em;
+            color: #ff1493;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .continue-btn {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(56, 239, 125, 0.4);
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .continue-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .continue-btn:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(56, 239, 125, 0.6);
+        }
+
+        .continue-btn:active {
+            transform: translateY(0);
+        }
+
+        /* ==================== MAIN CONTENT ==================== */
         #particles-canvas {
             position: fixed;
             top: 0;
@@ -42,7 +268,6 @@
             z-index: 1;
         }
 
-        /* Floating hearts background */
         .floating-heart {
             position: fixed;
             font-size: 30px;
@@ -80,25 +305,12 @@
         .floating-heart:nth-child(8) { left: 80%; animation-duration: 10s; animation-delay: 4s; }
         .floating-heart:nth-child(9) { left: 90%; animation-duration: 8s; animation-delay: 1s; }
 
-        /* Main container */
         .envelope-container {
             position: relative;
             z-index: 10;
             animation: fadeInScale 1s ease-out;
         }
 
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* Title */
         .title {
             position: absolute;
             top: -80px;
@@ -117,7 +329,6 @@
             50% { transform: translateX(-50%) scale(1.05); }
         }
 
-        /* Envelope */
         .envelope {
             position: relative;
             width: 380px;
@@ -137,21 +348,18 @@
                         0 0 50px rgba(255, 20, 147, 0.5);
         }
 
-        .envelope::before {
-            content: '';
+        .envelope-body {
             position: absolute;
-            top: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: all 0.6s ease;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #fff5f8 0%, #ffe8f0 100%);
+            border-radius: 20px;
+            z-index: 1;
+            box-shadow: inset 0 0 20px rgba(255, 20, 147, 0.1);
         }
 
-        .envelope.open::before {
-            opacity: 0;
-        }
-
-        /* Flap */
         .flap {
             position: absolute;
             top: 0;
@@ -179,7 +387,6 @@
             z-index: 2;
         }
 
-        /* Text on flap (wax seal) */
         .flap-text {
             position: absolute;
             top: 50%;
@@ -194,13 +401,6 @@
             white-space: nowrap;
             animation: bounce 2s ease-in-out infinite;
             letter-spacing: 0.5px;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.1); }
-            50% { transform: scale(1); }
-            75% { transform: scale(1.15); }
         }
 
         @keyframes bounce {
@@ -230,20 +430,6 @@
             }
         }
 
-        /* Envelope body */
-        .envelope-body {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #fff5f8 0%, #ffe8f0 100%);
-            border-radius: 20px;
-            z-index: 1;
-            box-shadow: inset 0 0 20px rgba(255, 20, 147, 0.1);
-        }
-
-        /* Letter */
         .letter {
             position: absolute;
             top: 100%;
@@ -355,7 +541,6 @@
             display: inline-block;
         }
 
-        /* Decorative corners */
         .letter-corner {
             position: absolute;
             width: 40px;
@@ -402,7 +587,6 @@
             transition-delay: 1s;
         }
 
-        /* Close button */
         .close-btn {
             position: fixed;
             bottom: 80px;
@@ -435,7 +619,6 @@
             transition-delay: 1.2s;
         }
 
-        /* Sparkling stars */
         .sparkle {
             position: absolute;
             font-size: 20px;
@@ -461,6 +644,27 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .quiz-container {
+                padding: 40px 30px;
+            }
+
+            .quiz-question {
+                font-size: 1.5em;
+            }
+
+            .quiz-emoji {
+                font-size: 60px;
+            }
+
+            .quiz-option {
+                font-size: 1em;
+                padding: 15px 25px;
+            }
+
+            .quiz-response p {
+                font-size: 1.1em;
+            }
+
             .envelope {
                 width: 340px;
                 height: 240px;
@@ -501,6 +705,29 @@
         }
 
         @media (max-width: 480px) {
+            .quiz-container {
+                padding: 30px 20px;
+            }
+
+            .quiz-question {
+                font-size: 1.3em;
+                margin-bottom: 30px;
+            }
+
+            .quiz-emoji {
+                font-size: 50px;
+            }
+
+            .quiz-option {
+                font-size: 0.95em;
+                padding: 14px 20px;
+            }
+
+            .continue-btn {
+                font-size: 1em;
+                padding: 12px 35px;
+            }
+
             .envelope {
                 width: 300px;
                 height: 210px;
@@ -550,26 +777,47 @@
     </style>
 </head>
 <body>
-    <!-- Canvas cho particles -->
+    <!-- QUIZ SCREEN -->
+    <div id="quiz-screen">
+        <div class="quiz-container">
+            <div class="quiz-emoji">💖</div>
+            <h2 class="quiz-question">Hôm nay là ngày gì thế bạn biết không?</h2>
+            
+            <div class="quiz-options" id="quiz-options">
+                <button class="quiz-option" onclick="selectAnswer(1)">
+                    💕 Là ngày Valentine 14/2 đó
+                </button>
+                <button class="quiz-option" onclick="selectAnswer(2)">
+                    🤔 Là ngày gì vậy? mình không biết á
+                </button>
+            </div>
+
+            <div class="quiz-response" id="quiz-response">
+                <p id="response-text"></p>
+                <button class="continue-btn" onclick="continueToLetter()">
+                    ✨ Vậy tớ có điều muốn nói á ✨
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
     <canvas id="particles-canvas"></canvas>
 
-    <!-- Floating hearts -->
     <div class="floating-heart">💖</div>
     <div class="floating-heart">💕</div>
-    <div class="floating-heart">💗</div>
-    <div class="floating-heart">💓</div>
-    <div class="floating-heart">💝</div>
     <div class="floating-heart">🌹</div>
-    <div class="floating-heart">💖</div>
-    <div class="floating-heart">💕</div>
+    <div class="floating-heart">💝</div>
+    <div class="floating-heart">💗</div>
     <div class="floating-heart">🌸</div>
+    <div class="floating-heart">💓</div>
+    <div class="floating-heart">🌺</div>
+    <div class="floating-heart">💖</div>
 
-    <!-- Envelope container -->
     <div class="envelope-container">
         <div class="title">💌 Thư Valentine 💌</div>
         
         <div class="envelope" id="envelope">
-            <!-- Sparkles -->
             <div class="sparkle">✨</div>
             <div class="sparkle">✨</div>
             <div class="sparkle">✨</div>
@@ -581,7 +829,6 @@
             </div>
             
             <div class="letter">
-                <!-- Decorative corners -->
                 <div class="letter-corner top-left"></div>
                 <div class="letter-corner top-right"></div>
                 <div class="letter-corner bottom-left"></div>
@@ -593,7 +840,7 @@
                     <p>Mong cậu sớm tìm được người ấy,<br>cute như tớ 💖</p>
                     <div class="letter-heart">🌹</div>
                     <p style="font-size: 18px; margin-top: 20px; color: #ff69b4; font-style: italic;">
-                        Yêu cậu nhiều lắm! - From P 💝
+                        Yêu cậu nhiều lắm! 💝
                     </p>
                     <p style="font-size: 14px; margin-top: 25px; color: #999; font-style: italic; opacity: 0.8;">
                         (Nhấn vào thư để đóng lại)
@@ -606,6 +853,33 @@
     </div>
 
     <script>
+        // ==================== QUIZ LOGIC ====================
+        function selectAnswer(choice) {
+            const options = document.getElementById('quiz-options');
+            const response = document.getElementById('quiz-response');
+            const responseText = document.getElementById('response-text');
+            
+            options.style.display = 'none';
+            
+            if (choice === 1) {
+                responseText.textContent = '🎉 Đúng rồi! Hôm nay là Valentine! 💖';
+            } else {
+                responseText.textContent = 'Hôm nay là ngày Valentine đó nhớ nhen 💕';
+            }
+            
+            response.classList.add('show');
+            createConfetti();
+        }
+
+        function continueToLetter() {
+            const quizScreen = document.getElementById('quiz-screen');
+            quizScreen.classList.add('hidden');
+            
+            setTimeout(() => {
+                quizScreen.style.display = 'none';
+            }, 800);
+        }
+
         // ==================== ENVELOPE INTERACTION ====================
         const envelope = document.getElementById('envelope');
         const closeBtn = document.getElementById('closeBtn');
@@ -620,7 +894,6 @@
             }
         });
         
-        // Click vào thư để đóng
         letter.addEventListener('click', function(e) {
             e.stopPropagation();
             if (envelope.classList.contains('open')) {
@@ -721,7 +994,7 @@
                     confetti.style.left = Math.random() * 100 + '%';
                     confetti.style.top = Math.random() * 100 + '%';
                     confetti.style.fontSize = (Math.random() * 30 + 20) + 'px';
-                    confetti.style.zIndex = '1000';
+                    confetti.style.zIndex = '10000';
                     confetti.style.pointerEvents = 'none';
                     confetti.style.animation = 'confettiFall 2s ease-out forwards';
                     document.body.appendChild(confetti);
@@ -730,7 +1003,6 @@
             }
         }
 
-        // Add confetti animation
         const confettiStyle = document.createElement('style');
         confettiStyle.textContent = `
             @keyframes confettiFall {
